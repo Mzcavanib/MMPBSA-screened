@@ -2,8 +2,12 @@
 #Building the simulation systems
 
 echo "starting build systems......"
-#choose the force field
-gmx pdb2gmx -f 1r0r.pdb -o protein.gro  
+pdb=$(ls *.pdb | head -n 1)
+
+gmx pdb2gmx -f "$pdb" -o protein.gro  <<EOF
+6
+1
+EOF
 
 gmx editconf -f protein.gro -o box.gro -c -d 1.5
 
